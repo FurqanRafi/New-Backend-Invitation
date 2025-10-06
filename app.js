@@ -1,5 +1,5 @@
 const express = require("express");
-const serverlessExpress = require("@vendia/serverless-express");
+const configureServerlessExpress = require("@vendia/serverless-express");
 const NavbarRouter = require("./routers/NavbarRouter");
 const HeroRouter = require("./routers/HeroRouter");
 const AboutRouter = require("./routers/AboutRouter");
@@ -36,6 +36,6 @@ app.use("/api", CardsRouter);
 app.use("/api", FooterRouter);
 app.use("/api", userRouter);
 
-module.exports = serverlessExpress({ app })
+module.exports = configureServerlessExpress({ app, eventSourceName: "vercel" });
 
 // app.listen(3000)
