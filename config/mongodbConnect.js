@@ -22,7 +22,7 @@ const ConnectDb = async () => {
   if (isConnected) return;
 
   try {
-    await mongoose.connect(process.env.MONGO_URL);
+    await mongoose.connect("mongodb+srv://furqan:furqan123@cluster0.udrs5zb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
     isConnected = true;
     console.log("MongoDB Connected");
   } catch (error) {
