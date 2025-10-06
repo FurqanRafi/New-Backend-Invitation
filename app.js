@@ -1,5 +1,5 @@
 const express = require("express");
-const serverlessExpress = require("@vendia/serverless-express");
+const serverlessExpress = require("@codegenie/serverless-express");
 const NavbarRouter = require("./routers/NavbarRouter");
 const HeroRouter = require("./routers/HeroRouter");
 const AboutRouter = require("./routers/AboutRouter");
