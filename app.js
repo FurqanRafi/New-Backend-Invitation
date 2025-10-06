@@ -1,4 +1,5 @@
 const express = require('express')
+const serverlessExpress = require('@vendia/serverless-express')
 const NavbarRouter = require ('./routers/NavbarRouter')
 const HeroRouter = require ('./routers/HeroRouter')
 const AboutRouter = require('./routers/AboutRouter')
@@ -9,7 +10,6 @@ const userRouter = require ('./routers/UserRouter')
 const ConnectDb = require('./config/mongodbConnect')
 const cors = require('cors')
 const dotenv = require('dotenv')
-
 
 
 const app = express()
@@ -33,5 +33,5 @@ app.use('/api', userRouter)
 
 
 
-module.exports = {app}
+module.exports = serverlessExpress({app})
 // app.listen(3000)
