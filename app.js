@@ -36,6 +36,6 @@ app.use("/api", CardsRouter);
 app.use("/api", FooterRouter);
 app.use("/api", userRouter);
 
-module.exports = serverlessExpress({ app });
+module.exports = app
 
 // app.listen(3000)
