@@ -14,6 +14,8 @@
 // module.exports = ConnectDb
 
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
 let isConnected = false;
 
 const ConnectDb = async () => {
