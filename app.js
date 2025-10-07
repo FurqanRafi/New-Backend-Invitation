@@ -16,16 +16,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-
-(async () => {
-  try {
-    await ConnectDb();
+ConnectDb()
+  .then(() => {
     console.log("MongoDB connected successfully");
-  } catch (err) {
+  })
+  .catch((err) => {
     console.error("MongoDB connection failed:", err);
-    // Optional: Return a basic handler if DB fails
-  }
-})();
+  });
 
 app.get("/", (req, res) => {
   res.send("You Entered the Backend");
@@ -39,6 +36,6 @@ app.use("/api", CardsRouter);
 app.use("/api", FooterRouter);
 app.use("/api", userRouter);
 
-exports.handler = serverlessExpress({ app });
+module.exports = app;
 
 // app.listen(3000);
