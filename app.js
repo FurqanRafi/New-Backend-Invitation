@@ -38,4 +38,4 @@ app.use("/api", userRouter);
 
 module.exports = app;
 
-// app.listen(3000);
+app.listen(3000);
