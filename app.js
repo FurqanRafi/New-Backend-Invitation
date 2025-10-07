@@ -10,9 +10,9 @@ const userRouter = require("./routers/UserRouter");
 const ConnectDb = require("./config/mongodbConnect");
 const cors = require("cors");
 const dotenv = require("dotenv");
+dotenv.config();
 
 const app = express();
-dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
@@ -38,4 +38,4 @@ app.use("/api", userRouter);
 
 module.exports = serverlessExpress({ app });
 
-// app.listen(3000)
+// app.listen(3000);
