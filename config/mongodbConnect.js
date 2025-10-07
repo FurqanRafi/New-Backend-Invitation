@@ -1,38 +1,29 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
+let isConnected = false; // Global variable to cache connection
 
-const ConnectDb = async () =>{
-    try {
-        await mongoose.connect(process.env.MONGO_URL)
-        console.log('Mongodb Connected')
-    } catch (error){
-        console.log(error)
-    } finally {
-        
-    }
-}
+const ConnectDb = async () => {
+  if (isConnected) {
+    console.log("=> using existing database connection");
+    return;
+  }
 
-module.exports = ConnectDb
+  if (!process.env.MONGO_URL) {
+    throw new Error("MONGO_URL not defined in environment variables");
+  }
 
-// // module.exports = ConnectDb
+  try {
+    await mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
-// const mongoose = require("mongoose");
-// const dotenv = require("dotenv");
-// dotenv.config();
-// let isConnected = false;
+    isConnected = true;
+    console.log("=> new database connection");
+  } catch (err) {
+    console.error("DB connection error:", err);
+    throw err; // So it fails clearly
+  }
+};
 
-// const ConnectDb = async () => {
-//   if (isConnected) return;
-
-//   try {
-//     await mongoose.connect("mongodb+srv://furqan:furqan123@cluster0.udrs5zb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
-//     isConnected = true;
-//     console.log("MongoDB Connected");
-//   } catch (error) {
-//     console.error("Mongo Error:", error);
-//     throw error;
-//   }
-// };
-
-// module.exports = ConnectDb;
-// >>>>>>> 08f4695c2457480a5c6f3d5b401bdc834a7cbd0c
+module.exports = ConnectDb;

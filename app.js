@@ -16,13 +16,16 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-ConnectDb()
-  .then(() => {
+
+(async () => {
+  try {
+    await ConnectDb();
     console.log("MongoDB connected successfully");
-  })
-  .catch((err) => {
+  } catch (err) {
     console.error("MongoDB connection failed:", err);
-  });
+    // Optional: Return a basic handler if DB fails
+  }
+})();
 
 app.get("/", (req, res) => {
   res.send("You Entered the Backend");
